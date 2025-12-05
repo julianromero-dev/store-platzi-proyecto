@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="controls">
+    <input type="text" placeholder="Buscar producto..." (input)="filter($event)" class="search-bar">
+  </div>
+
+  <!-- loader-->
+  <div *ngIf="loading()" class="loader">
+    <div class="spinner"></div>
+    <p>Cargando productos...</p>
+  </div>
+
+  <div class="grid" *ngIf="!loading()">
+    <div *ngFor="let product of filteredProducts()" class="card">
+      <img [src]="product.images[0]" [alt]="product.title" class="product-image">
+      <div class="card-body">
+        <h3>{{ product.title }}</h3>
+        <p class="price">${{ product.price }}</p>
+        <p class="category">{{ product.category.name }}</p>
+        <div class="actions">
+          <button (click)="addToCart(product)" class="btn-add">Agregar</button>
+          <ng-container *ngIf="authService.isAuthenticated()">
+            <button [routerLink]="['/edit-product', product.id]" class="btn-edit">✏️</button>
+            <button (click)="deleteProduct(product.id)" class="btn-delete">🗑️</button>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

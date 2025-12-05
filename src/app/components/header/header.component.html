@@ -1,0 +1,18 @@
+<header class="header">
+  <div class="container">
+    <a routerLink="/" class="logo">PlatziStore</a>
+    <nav>
+      <a routerLink="/">Productos</a>
+      <ng-container *ngIf="authService.isAuthenticated(); else loginTemplate">
+        <a routerLink="/create-product">Crear Producto</a>
+        <button (click)="logout()">Salir</button>
+      </ng-container>
+      <ng-template #loginTemplate>
+        <a routerLink="/login">Ingresar</a>
+      </ng-template>
+      <div class="cart">
+        🛒{{ cartService.cart().length }}
+      </div>
+    </nav>
+  </div>
+</header>

@@ -1,0 +1,54 @@
+.header {
+  background: #fff;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 1.5rem;
+  text-decoration: none;
+  color: #333;
+}
+
+nav {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+a {
+  text-decoration: none;
+  color: #555;
+  font-weight: 500;
+}
+
+a:hover {
+  color: #000;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  color: #d9534f;
+}
+
+.cart {
+  background: #f0f0f0;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: bold;
+}

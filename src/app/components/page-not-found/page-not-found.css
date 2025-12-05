@@ -1,0 +1,23 @@
+.container {
+    background-color: #f9f9f9;
+    text-align: center;
+    padding: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.button-center {
+    padding: 10px 20px;
+    background-color: #000;
+    color: white;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.button-center:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+

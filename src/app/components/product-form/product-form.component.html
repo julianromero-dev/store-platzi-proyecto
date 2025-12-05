@@ -1,0 +1,31 @@
+<div class="container">
+  <h2>{{ isEditMode ? 'Editar' : 'Crear' }} Producto</h2>
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+    <div class="form">
+      <label>Título</label>
+      <input formControlName="title" placeholder="Nombre del producto">
+    </div>
+    <div class="form">
+      <label>Precio</label>
+      <input type="number" formControlName="price" placeholder="0.00">
+    </div>
+    <div class="form">
+      <label>Descripción</label>
+      <textarea formControlName="description" rows="4"></textarea>
+    </div>
+    <div class="form">
+      <label>ID Categoría</label>
+      <input type="number" formControlName="categoryId" placeholder="1">
+    </div>
+    <div class="form">
+      <label>URL Imagen</label>
+      <input formControlName="images" placeholder="https://picsum.photos/640/480">
+      <small>Ingresa una URL de imagen</small>
+    </div>
+
+    <div class="actions">
+      <button type="button" (click)="router.navigate(['/'])" class="btn-cancel">Cancelar</button>
+      <button type="submit" [disabled]="productForm.invalid" class="btn-save">Guardar</button>
+    </div>
+  </form>
+</div>
