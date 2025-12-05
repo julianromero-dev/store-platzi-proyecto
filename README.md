@@ -46,7 +46,7 @@ Inicia sesión con las siguientes credenciales
 
 ## Despliegue en vercel
 
-Link del Vercel: ``
+Link del Vercel: `https://store-platzi-proyecto.vercel.app/`
 
 
 ## Estructura del Proyecto
