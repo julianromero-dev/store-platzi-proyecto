@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
@@ -16,6 +16,7 @@ export class LoginComponent {
   authService = inject(AuthService);
   router = inject(Router);
   errorMessage = '';
+  successMessage = signal(false);
 
   loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
@@ -26,11 +27,13 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       this.authService.login(this.loginForm.getRawValue() as any).subscribe({
         next: () => {
-          this.router.navigate(['/']);
+          this.successMessage.set(true);
+          setTimeout(() => {
+            this.router.navigate(['/']);
+          }, 1500);
         },
-        error: (err) => {
-          this.errorMessage = 'Credenciales incorrectas';
-          console.error(err);
+        error: () => {
+          this.errorMessage = 'credenciales incorrectas';
         }
       });
     }

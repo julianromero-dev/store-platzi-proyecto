@@ -2,30 +2,87 @@
   <h2>{{ isEditMode ? 'Editar' : 'Crear' }} Producto</h2>
   <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
     <div class="form">
-      <label>Título</label>
-      <input formControlName="title" placeholder="Nombre del producto">
+      <label>Título (6-100 caracteres)</label>
+      <input formControlName="title" placeholder="Nombre del producto" maxlength="100" />
+      <small>{{ productForm.get('title')?.value?.length || 0 }}/100 caracteres</small>
+      <div
+        class="error"
+        *ngIf="productForm.get('title')?.invalid && productForm.get('title')?.touched"
+      >
+        <small *ngIf="productForm.get('title')?.errors?.['required']">El título es requerido</small>
+        <small *ngIf="productForm.get('title')?.errors?.['minlength']">Mínimo 6 caracteres</small>
+      </div>
     </div>
     <div class="form">
       <label>Precio</label>
-      <input type="number" formControlName="price" placeholder="0.00">
+      <input type="number" formControlName="price" placeholder="$1.000" />
+      <div
+        class="error"
+        *ngIf="productForm.get('price')?.invalid && productForm.get('price')?.touched"
+      >
+        <small *ngIf="productForm.get('price')?.errors?.['required']">El precio es requerido</small>
+        <small *ngIf="productForm.get('price')?.errors?.['min']"
+          >El precio debe ser mayor a 0</small
+        >
+      </div>
     </div>
     <div class="form">
-      <label>Descripción</label>
-      <textarea formControlName="description" rows="4"></textarea>
+      <label>Descripción (10-500 caracteres)</label>
+      <textarea formControlName="description" rows="4" maxlength="500"></textarea>
+      <small>{{ productForm.get('description')?.value?.length || 0 }}/500 caracteres</small>
+      <div
+        class="error"
+        *ngIf="productForm.get('description')?.invalid && productForm.get('description')?.touched"
+      >
+        <small *ngIf="productForm.get('description')?.errors?.['required']"
+          >La descripción es requerida</small
+        >
+        <small *ngIf="productForm.get('description')?.errors?.['minlength']"
+          >Mínimo 10 caracteres</small
+        >
+      </div>
     </div>
     <div class="form">
-      <label>ID Categoría</label>
-      <input type="number" formControlName="categoryId" placeholder="1">
+      <label>Categoría</label>
+      <select formControlName="categoryId">
+        <option value="" disabled>Selecciona una categoría</option>
+        <option *ngFor="let category of categories()" [value]="category.id">
+          {{ category.name }} (ID: {{ category.id }})
+        </option>
+      </select>
+      <small>Selecciona de las categorías disponibles en la API</small>
+      <div
+        class="error"
+        *ngIf="productForm.get('categoryId')?.invalid && productForm.get('categoryId')?.touched"
+      >
+        <small *ngIf="productForm.get('categoryId')?.errors?.['required']"
+          >La categoría es requerida</small
+        >
+      </div>
     </div>
     <div class="form">
       <label>URL Imagen</label>
-      <input formControlName="images" placeholder="https://picsum.photos/640/480">
-      <small>Ingresa una URL de imagen</small>
+      <input formControlName="images" placeholder="https://picsum.photos/640/480" />
+      <small
+        >Usa URLs válidas como: https://picsum.photos/640/480 o
+        https://i.imgur.com/ejemplo.jpg</small
+      >
+      <div
+        class="error"
+        *ngIf="productForm.get('images')?.invalid && productForm.get('images')?.touched"
+      >
+        <small *ngIf="productForm.get('images')?.errors?.['required']"
+          >La imagen es requerida</small
+        >
+        <small *ngIf="productForm.get('images')?.errors?.['minlength']">URL muy corta</small>
+      </div>
     </div>
 
     <div class="actions">
       <button type="button" (click)="router.navigate(['/'])" class="btn-cancel">Cancelar</button>
-      <button type="submit" [disabled]="productForm.invalid" class="btn-save">Guardar</button>
+      <button type="submit" [disabled]="productForm.invalid || isSubmitting" class="btn-save">
+        {{ isSubmitting ? 'Guardando...' : 'Guardar' }}
+      </button>
     </div>
   </form>
 </div>

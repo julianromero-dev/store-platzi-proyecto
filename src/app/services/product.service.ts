@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';//GET, POST, PUT, DELETE
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Product, CreateProductDTO, UpdateProductDTO } from '../models/product.model';
 import { AuthService } from './auth.service';
@@ -14,8 +14,6 @@ export class ProductService {
 
 
   getProducts(): Observable<Product[]> {
-    console.log(this.http.get<Product[]>(this.apiUrl));
-
     return this.http.get<Product[]>(this.apiUrl);
   }
 

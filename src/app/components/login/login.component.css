@@ -3,6 +3,40 @@
   justify-content: center;
   align-items: center;
   height: 80vh;
+  position: relative;
+}
+
+.success-popup {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  animation: slideIn 0.3s ease-out;
+}
+
+.popup-content {
+  background: #28a745;
+  color: white;
+  padding: 15px 25px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.popup-content p {
+  margin: 0;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 .card {
@@ -61,4 +95,29 @@ button:disabled {
 span {
   display: flex;
   margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+  .login-container {
+    padding: 1rem;
+  }
+
+  .card {
+    padding: 1.5rem;
+    max-width: 100%;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  .success-popup {
+    top: 10px;
+    right: 10px;
+    left: 10px;
+  }
+
+  .popup-content {
+    padding: 12px 20px;
+  }
 }

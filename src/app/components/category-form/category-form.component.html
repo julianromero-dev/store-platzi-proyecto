@@ -1,0 +1,29 @@
+<div class="container">
+  <h2>Crear Nueva Categoría</h2>
+  <form [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
+    <div class="form">
+      <label>Nombre (8-20 caracteres)</label>
+      <input formControlName="name" placeholder="Nombre de la categoría" maxlength="50">
+      <small>{{ categoryForm.get('name')?.value?.length || 0 }}/50 caracteres</small>
+      <div class="error" *ngIf="categoryForm.get('name')?.invalid && categoryForm.get('name')?.touched">
+        <small *ngIf="categoryForm.get('name')?.errors?.['required']">El nombre es requerido</small>
+        <small *ngIf="categoryForm.get('name')?.errors?.['minlength']">Mínimo 8 caracteres</small>
+      </div>
+    </div>
+
+    <div class="form">
+      <label>URL Imagen</label>
+      <input formControlName="image" placeholder="https://picsum.photos/640/480">
+      <small>Ingresa una URL de imagen para la categoría</small>
+      <div class="error" *ngIf="categoryForm.get('image')?.invalid && categoryForm.get('image')?.touched">
+        <small *ngIf="categoryForm.get('image')?.errors?.['required']">La imagen es requerida</small>
+        <small *ngIf="categoryForm.get('image')?.errors?.['minlength']">URL muy corta</small>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button type="button" (click)="router.navigate(['/'])" class="btn-cancel">Cancelar</button>
+      <button type="submit" [disabled]="categoryForm.invalid" class="btn-save">Guardar</button>
+    </div>
+  </form>
+</div>

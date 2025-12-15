@@ -1,4 +1,5 @@
 # Proyecto Platzi Store con Angular
+
 Este es un proyecto de tipo E-commerce simple que consume la api falsa de platzi que realiza un CRUD simple
 
 ## Sus características
@@ -6,7 +7,7 @@ Este es un proyecto de tipo E-commerce simple que consume la api falsa de platzi
 - Autenticación JWT y protección de rutas
 - Operaciones CRUD de listar, editar, crear y eliminar
 - Carrito de compras persistente
-- Diseño simple 
+- Diseño simple
 - Un loader de carga
 
 ## Credenciales de acceso
@@ -48,20 +49,24 @@ Inicia sesión con las siguientes credenciales
 
 Link del Vercel: `https://store-platzi-proyecto.vercel.app/`
 
-
 ## Estructura del Proyecto
 
 ```
 src/app/
-├── components/         
-│   ├── header/        
-│   ├── login/          
-│   ├── product-list/   
-│   └── product-form/   
-├── guards/        
-├── models/       
-├── services/        
-├── app.component     
-├── app.config.ts       
-└── app.routes.ts       
+├── components/
+│   ├── cart/
+│   ├── category-form/
+│   ├── header/
+│   ├── login/
+│   ├── page-not-found/
+│   ├── product-detail/
+│   ├── product-form/
+│   └── product-list/
+│   
+├── guards/
+├── models/
+├── services/
+├── app.component
+├── app.config.ts
+└── app.routes.ts
 ```

@@ -1,9 +1,36 @@
 <div class="container">
   <div class="controls">
-    <input type="text" placeholder="Buscar producto..." (input)="filter($event)" class="search-bar">
+    <input
+      type="text"
+      placeholder="Buscar producto..."
+      (input)="filter($event)"
+      class="search-bar"
+    />
   </div>
 
-  <!-- loader-->
+  <div class="categories">
+    <h2>Categorías</h2>
+    <div class="cat-grid">
+      <div
+        class="cat-card"
+        [class.active]="selectedCategoryId() === null"
+        (click)="filterByCategory(null)">
+        <div class="cat-img">
+          <span class="cat-icon">🏪</span>
+        </div>
+        <p class="cat-name">Todas</p>
+      </div>
+      <div
+        *ngFor="let category of categories()"
+        class="cat-card"
+        [class.active]="selectedCategoryId() === category.id"
+        (click)="filterByCategory(category.id)">
+        <img [src]="category.image" [alt]="category.name" class="cat-img" />
+        <p class="cat-name">{{ category.name }}</p>
+      </div>
+    </div>
+  </div>
+
   <div *ngIf="loading()" class="loader">
     <div class="spinner"></div>
     <p>Cargando productos...</p>
@@ -11,9 +38,13 @@
 
   <div class="grid" *ngIf="!loading()">
     <div *ngFor="let product of filteredProducts()" class="card">
-      <img [src]="product.images[0]" [alt]="product.title" class="product-image">
+      <a [routerLink]="['/product', product.id]" class="product-link">
+        <img [src]="product.images[0]" [alt]="product.title" class="product-image" />
+      </a>
       <div class="card-body">
-        <h3>{{ product.title }}</h3>
+        <a [routerLink]="['/product', product.id]" class="product-link">
+          <h3>{{ product.title }}</h3>
+        </a>
         <p class="price">${{ product.price }}</p>
         <p class="category">{{ product.category.name }}</p>
         <div class="actions">

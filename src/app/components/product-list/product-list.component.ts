@@ -1,7 +1,8 @@
 import { Component, inject, signal } from '@angular/core';
 import { ProductService } from '../../services/product.service';
+import { CategoryService } from '../../services/category.service';
 import { CartService } from '../../services/cart.service';
-import { Product } from '../../models/product.model';
+import { Product, Category } from '../../models/product.model';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
@@ -15,80 +16,73 @@ import { AuthService } from '../../services/auth.service';
 })
 export class ProductListComponent {
 
-
   productService = inject(ProductService);
-
+  categoryService = inject(CategoryService);
   cartService = inject(CartService);
-
   authService = inject(AuthService);
 
-
   products = signal<Product[]>([]);
-
   filteredProducts = signal<Product[]>([]);
-
+  categories = signal<Category[]>([]);
   loading = signal(true);
-
+  selectedCategoryId = signal<number | null>(null);
 
   constructor() {
-
     this.loadProducts();
-
+    this.loadCategories();
   }
 
-
   loadProducts() {
-
     this.loading.set(true);
-
     this.productService.getProducts().subscribe(data => {
-
       this.products.set(data);
-
       this.filteredProducts.set(data);
-
       this.loading.set(false);
+    });
+  }
+
+  loadCategories() {
+    this.categoryService.getCategories().subscribe(data => {
+      this.categories.set(data);
 
     });
   }
 
   filter(event: Event) {
-
-    const query = (event.target as HTMLInputElement).value.
-    toLowerCase();
-
+    const query = (event.target as HTMLInputElement).value.toLowerCase();
+    this.selectedCategoryId.set(null);
     this.filteredProducts.set(
-
       this.products().filter(p => p.title.toLowerCase().includes(query))
-
     );
   }
 
+  filterByCategory(categoryId: number | null) {
+    this.selectedCategoryId.set(categoryId);
+
+    if (categoryId === null) {
+      this.filteredProducts.set(this.products());
+
+    } else {
+      this.filteredProducts.set(
+        this.products().filter(p => p.category.id === categoryId)
+      );
+    }
+  }
+
   addToCart(product: Product) {
-
     if (!this.authService.isAuthenticated()) {
-
-      alert('Debes iniciar sesión para agregar productos al carrito');
+      alert('debes iniciar sesión para agregar productos al carrito');
       return;
     }
-
     this.cartService.addToCart(product);
-    alert('Producto agregado al carrito');
+    alert('producto agregado al carrito');
   }
-
 
   deleteProduct(id: number) {
-
-    if (confirm('¿Estás seguro de eliminar este producto?')) {
-
+    if (confirm('estás seguro de eliminar este producto?')) {
       this.productService.deleteProduct(id).subscribe(() => {
-
         this.loadProducts();
-
       });
-
     }
-
   }
-
 }

@@ -1,0 +1,29 @@
+<div class="container">
+  <h2>Carrito de Compras</h2>
+
+  <div *ngIf="cartService.cart().length === 0" class="empty-cart">
+    <p>Tu carrito está vacío</p>
+    <a routerLink="/" class="btn">Ver Productos</a>
+  </div>
+
+  <div *ngIf="cartService.cart().length > 0">
+    <div class="cart-items">
+      <div class="cart-item" *ngFor="let product of cartService.cart(); let i = index">
+        <img [src]="product.images[0]" [alt]="product.title">
+        <div class="item-info">
+          <h3>{{ product.title }}</h3>
+          <p class="category">{{ product.category.name }}</p>
+          <p class="price">${{ product.price }}</p>
+        </div>
+        <button (click)="removeItem(i)" class="btn-remove">Eliminar</button>
+      </div>
+    </div>
+
+    <div class="cart-summary">
+      <h3>Total: ${{ cartService.total() }}</h3>
+      <div class="actions">
+        <button (click)="clearCart()" class="btn-clear">Vaciar Carrito</button>
+      </div>
+    </div>
+  </div>
+</div>

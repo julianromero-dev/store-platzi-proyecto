@@ -1,0 +1,23 @@
+<div class="container">
+  <div *ngIf="loading()" class="loading">
+    <p>Cargando producto...</p>
+  </div>
+
+  <div *ngIf="!loading() && product()" class="product-detail">
+    <div class="product-image">
+      <img [src]="product()!.images[0]" [alt]="product()!.title">
+    </div>
+
+    <div class="product-info">
+      <h1>{{ product()!.title }}</h1>
+      <p class="category">Categoría: {{ product()!.category.name }}</p>
+      <p class="price">${{ product()!.price }}</p>
+      <p class="description">{{ product()!.description }}</p>
+
+      <div class="actions">
+        <button (click)="addToCart(product()!)" class="btn-add">Agregar al Carrito</button>
+        <a routerLink="/" class="btn-back">Volver a Productos</a>
+      </div>
+    </div>
+  </div>
+</div>
