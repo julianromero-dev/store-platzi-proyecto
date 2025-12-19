@@ -18,6 +18,8 @@
       <div class="error" *ngIf="categoryForm.get('image')?.invalid && categoryForm.get('image')?.touched">
         <small *ngIf="categoryForm.get('image')?.errors?.['required']">La imagen es requerida</small>
         <small *ngIf="categoryForm.get('image')?.errors?.['minlength']">URL muy corta</small>
+        <small *ngIf="categoryForm.get('image')?.errors?.['invalidUrl']">La URL no es válida</small>
+        <small *ngIf="categoryForm.get('image')?.errors?.['multipleUrls']">Solo se permite una única URL de imagen</small>
       </div>
     </div>
 

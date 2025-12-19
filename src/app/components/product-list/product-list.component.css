@@ -145,12 +145,39 @@ h3 {
   color: #333;
 }
 
-.cat-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  gap: 15px;
-  margin-bottom: 30px;
+.cat-slider-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
 }
+
+.cat-slider {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding-bottom: 6px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.cat-slider::-webkit-scrollbar { height: 8px; }
+.cat-slider::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 999px; }
+
+.arrow {
+  background: transparent;
+  border: 1px solid #ddd;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.arrow:hover { background: #f0f0f0; }
+
+.cat-card { min-width: 120px; }
+
+/* previous grid fallback styles remain for small screens */
 
 .cat-card {
   background: white;

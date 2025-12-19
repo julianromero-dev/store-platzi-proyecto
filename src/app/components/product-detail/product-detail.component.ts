@@ -5,7 +5,8 @@ import { CartService } from '../../services/cart.service';
 import { AuthService } from '../../services/auth.service';
 import { Product } from '../../models/product.model';
 import { CommonModule } from '@angular/common';
-
+import { NotificationService } from '../../services/notification.service';
+//componente de detalles del producto
 @Component({
   selector: 'app-product-detail',
   standalone: true,
@@ -19,6 +20,7 @@ export class ProductDetailComponent implements OnInit {
   productService = inject(ProductService);
   cartService = inject(CartService);
   authService = inject(AuthService);
+  notification = inject(NotificationService);
 
   product = signal<Product | null>(null);
   loading = signal(true);
@@ -44,10 +46,10 @@ export class ProductDetailComponent implements OnInit {
 
   addToCart(product: Product) {
     if (!this.authService.isAuthenticated()) {
-      alert('Debes iniciar sesión para agregar productos al carrito');
+      this.notification.warn('Debes iniciar sesión para agregar productos al carrito');
       return;
     }
     this.cartService.addToCart(product);
-    alert('Producto agregado al carrito');
+    this.notification.success('Producto agregado al carrito');
   }
 }

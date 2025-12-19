@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, ViewChild, ElementRef } from '@angular/core';
 import { ProductService } from '../../services/product.service';
 import { CategoryService } from '../../services/category.service';
 import { CartService } from '../../services/cart.service';
@@ -6,7 +6,8 @@ import { Product, Category } from '../../models/product.model';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-
+import { NotificationService } from '../../services/notification.service';
+//componente de inicio (home)
 @Component({
   selector: 'app-product-list',
   standalone: true,
@@ -20,6 +21,9 @@ export class ProductListComponent {
   categoryService = inject(CategoryService);
   cartService = inject(CartService);
   authService = inject(AuthService);
+  notification = inject(NotificationService);
+
+  @ViewChild('catSlider') catSlider!: ElementRef<HTMLElement>;
 
   products = signal<Product[]>([]);
   filteredProducts = signal<Product[]>([]);
@@ -71,18 +75,32 @@ export class ProductListComponent {
 
   addToCart(product: Product) {
     if (!this.authService.isAuthenticated()) {
-      alert('debes iniciar sesión para agregar productos al carrito');
+      this.notification.warn('Debes iniciar sesión para agregar productos al carrito');
       return;
     }
     this.cartService.addToCart(product);
-    alert('producto agregado al carrito');
+    this.notification.success('Producto agregado al carrito');
   }
 
   deleteProduct(id: number) {
     if (confirm('estás seguro de eliminar este producto?')) {
-      this.productService.deleteProduct(id).subscribe(() => {
-        this.loadProducts();
+      this.productService.deleteProduct(id).subscribe({
+        next: () => {
+          this.notification.success('Producto eliminado');
+          this.loadProducts();
+        },
+        error: () => this.notification.error('Error al eliminar el producto')
       });
     }
+  }
+
+  slideLeft() {
+    const el = this.catSlider?.nativeElement;
+    if (el) el.scrollBy({ left: -200, behavior: 'smooth' });
+  }
+
+  slideRight() {
+    const el = this.catSlider?.nativeElement;
+    if (el) el.scrollBy({ left: 200, behavior: 'smooth' });
   }
 }

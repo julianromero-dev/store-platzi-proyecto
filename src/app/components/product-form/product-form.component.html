@@ -75,6 +75,8 @@
           >La imagen es requerida</small
         >
         <small *ngIf="productForm.get('images')?.errors?.['minlength']">URL muy corta</small>
+        <small *ngIf="productForm.get('images')?.errors?.['invalidUrl']">La URL de la imagen no es válida</small>
+        <small *ngIf="productForm.get('images')?.errors?.['multipleUrls']">Solo se permite una única URL de imagen</small>
       </div>
     </div>
 

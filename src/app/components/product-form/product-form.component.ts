@@ -5,7 +5,9 @@ import { ProductService } from '../../services/product.service';
 import { CategoryService } from '../../services/category.service';
 import { Category } from '../../models/product.model';
 import { CommonModule } from '@angular/common';
-
+import { NotificationService } from '../../services/notification.service';
+import { singleUrlValidator } from '../../utils/validators';
+//componente del formulario de crear productos
 @Component({
   selector: 'app-product-form',
   standalone: true,
@@ -19,6 +21,7 @@ export class ProductFormComponent implements OnInit {
   categoryService = inject(CategoryService);
   router = inject(Router);
   route = inject(ActivatedRoute);
+  notification = inject(NotificationService);
 
   isEditMode = false;
   productId: number | null = null;
@@ -31,7 +34,7 @@ export class ProductFormComponent implements OnInit {
     price: [0, [Validators.required, Validators.min(1)]],
     description: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(500)]],
     categoryId: [1, Validators.required],
-    images: this.fb.control('', [Validators.required, Validators.minLength(15)])
+    images: this.fb.control('', [Validators.required, Validators.minLength(15), singleUrlValidator])
   });
 
   ngOnInit() {
@@ -87,21 +90,23 @@ export class ProductFormComponent implements OnInit {
       if (this.isEditMode && this.productId) {
         this.productService.updateProduct(this.productId, dto).subscribe({
           next: (response) => {
-            alert(`producto actualizado exitosamente! id: ${response.id}título: ${response.title}precio: $${response.price}categoría: ${response.category?.name || 'N/A'}`);
+            this.notification.success(`Producto actualizado: ${response.title}`);
             this.router.navigate(['/']);
           },
           error: () => {
             this.isSubmitting = false;
+            this.notification.error('Error al actualizar el producto');
           }
         });
       } else {
         this.productService.createProduct(dto).subscribe({
           next: (response) => {
-            alert(`producto creado exitosamente!id: ${response.id}título: ${response.title}precio: $${response.price}categoría: ${response.category?.name}puedes usar el id: ${response.id} para editar o eliminar este producto`);
+            this.notification.success(`Producto creado: ${response.title}`);
             this.router.navigate(['/']);
           },
           error: () => {
             this.isSubmitting = false;
+            this.notification.error('Error al crear el producto');
           }
         });
       }

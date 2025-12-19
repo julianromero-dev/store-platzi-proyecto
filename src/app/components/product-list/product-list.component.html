@@ -10,24 +10,28 @@
 
   <div class="categories">
     <h2>Categorías</h2>
-    <div class="cat-grid">
-      <div
-        class="cat-card"
-        [class.active]="selectedCategoryId() === null"
-        (click)="filterByCategory(null)">
-        <div class="cat-img">
-          <span class="cat-icon">🏪</span>
+    <div class="cat-slider-wrapper">
+      <button class="arrow left" (click)="slideLeft()">◀</button>
+      <div class="cat-slider" #catSlider>
+        <div
+          class="cat-card"
+          [class.active]="selectedCategoryId() === null"
+          (click)="filterByCategory(null)">
+          <div class="cat-img">
+            <span class="cat-icon">🏪</span>
+          </div>
+          <p class="cat-name">Todas</p>
         </div>
-        <p class="cat-name">Todas</p>
+        <div
+          *ngFor="let category of categories()"
+          class="cat-card"
+          [class.active]="selectedCategoryId() === category.id"
+          (click)="filterByCategory(category.id)">
+          <img [src]="category.image" [alt]="category.name" class="cat-img" />
+          <p class="cat-name">{{ category.name }}</p>
+        </div>
       </div>
-      <div
-        *ngFor="let category of categories()"
-        class="cat-card"
-        [class.active]="selectedCategoryId() === category.id"
-        (click)="filterByCategory(category.id)">
-        <img [src]="category.image" [alt]="category.name" class="cat-img" />
-        <p class="cat-name">{{ category.name }}</p>
-      </div>
+      <button class="arrow right" (click)="slideRight()">▶</button>
     </div>
   </div>
 
