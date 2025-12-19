@@ -49,6 +49,12 @@ Inicia sesión con las siguientes credenciales
 
 Link del Vercel: `https://store-platzi-proyecto.vercel.app/`
 
+## Notificaciones y validaciones nuevas 🔧
+
+- Se agregó un sistema de notificaciones tipo "toasts" (componente `app-toasts` y `NotificationService`) para mostrar mensajes de éxito, error e información en lugar de `alert`.
+- Se agregó un validador personalizado que evita pegar **múltiples URLs** en los campos de imagen (`productForm.images` y `categoryForm.image`). Si se detectan varias URLs o un formato inválido, el formulario mostrará un error y no permitirá enviar.
+- Se añadió un **slider horizontal** simple para mostrar las categorías en `ProductList`.
+
 ## Estructura del Proyecto
 
 ```

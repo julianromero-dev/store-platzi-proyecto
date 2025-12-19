@@ -7,7 +7,7 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
 import { CategoryFormComponent } from './components/category-form/category-form.component';
 import { authGuard } from './guards/auth.guard';
 import { PageNotFound } from './components/page-not-found/page-not-found';
-
+//rutas protegidas
 export const routes: Routes = [
   { path: '', component: ProductListComponent },
   { path: 'login', component: LoginComponent },
