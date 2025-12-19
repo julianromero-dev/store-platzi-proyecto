@@ -1,3 +1,4 @@
+//estructura de datos
 export interface User {
   id: number;
   email: string;

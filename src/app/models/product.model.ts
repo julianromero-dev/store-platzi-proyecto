@@ -1,3 +1,5 @@
+//estructura de datos
+
 export interface Category {
   id: number;
   name: string;
