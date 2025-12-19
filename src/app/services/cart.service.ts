@@ -1,6 +1,6 @@
 import { Injectable, signal, computed, effect } from '@angular/core';
 import { Product } from '../models/product.model';
-
+//servicio del carrito
 @Injectable({
   providedIn: 'root'
 })

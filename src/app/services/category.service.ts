@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Category } from '../models/product.model';
 import { AuthService } from './auth.service';
-
+//servicio de categorias
 export interface CreateCategoryDTO {
   name: string;
   image: string;

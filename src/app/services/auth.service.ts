@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable, tap } from 'rxjs';
 import { AuthResponse, User } from '../models/auth.model';
-
+//servicio de auth
 @Injectable({
   providedIn: 'root'
 })
