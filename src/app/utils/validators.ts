@@ -1,5 +1,5 @@
 import { AbstractControl, ValidationErrors } from '@angular/forms';
-
+//validador
 
 export function singleUrlValidator(control: AbstractControl): ValidationErrors | null {
   const value = (control.value || '').trim();
