@@ -2,7 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NotificationService, ToastMessage } from '../../services/notification.service';
 import { Subscription } from 'rxjs';
-
+//toastr para manejo de errores
 @Component({
   selector: 'app-toasts',
   standalone: true,
