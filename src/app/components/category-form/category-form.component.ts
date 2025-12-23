@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { CategoryService } from '../../services/category.service';
 import { CommonModule } from '@angular/common';
 import { NotificationService } from '../../services/notification.service';
-import { singleUrlValidator } from '../../utils/validators';
+import { singleUrlValidator, noWhitespaceValidator } from '../../utils/validators';
 //componente del formulario de categoria
 @Component({
   selector: 'app-category-form',
@@ -20,7 +20,7 @@ export class CategoryFormComponent {
   notification = inject(NotificationService);
 
   categoryForm = this.fb.group({
-    name: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(20)]],
+    name: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(20), noWhitespaceValidator]],
     image: ['', [Validators.required, Validators.minLength(5), singleUrlValidator]]
   });
 

@@ -68,10 +68,11 @@ src/app/
 │   ├── product-detail/
 │   ├── product-form/
 │   └── product-list/
-│   
+│
 ├── guards/
 ├── models/
 ├── services/
+├── utils/
 ├── app.component
 ├── app.config.ts
 └── app.routes.ts

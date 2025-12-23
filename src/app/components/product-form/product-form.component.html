@@ -11,6 +11,7 @@
       >
         <small *ngIf="productForm.get('title')?.errors?.['required']">El título es requerido</small>
         <small *ngIf="productForm.get('title')?.errors?.['minlength']">Mínimo 6 caracteres</small>
+        <small *ngIf="productForm.get('title')?.errors?.['whitespace']">No se permiten espacios en blanco vacíos</small>
       </div>
     </div>
     <div class="form">
@@ -40,6 +41,7 @@
         <small *ngIf="productForm.get('description')?.errors?.['minlength']"
           >Mínimo 10 caracteres</small
         >
+        <small *ngIf="productForm.get('description')?.errors?.['whitespace']">No se permiten espacios en blanco vacíos</small>
       </div>
     </div>
     <div class="form">
@@ -64,8 +66,7 @@
       <label>URL Imagen</label>
       <input formControlName="images" placeholder="https://picsum.photos/640/480" />
       <small
-        >Usa URLs válidas como: https://picsum.photos/640/480 o
-        https://i.imgur.com/ejemplo.jpg</small
+        >Usa URLs válidas como: https://picsum.photos/640/480</small
       >
       <div
         class="error"

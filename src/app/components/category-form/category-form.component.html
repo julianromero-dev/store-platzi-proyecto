@@ -8,6 +8,7 @@
       <div class="error" *ngIf="categoryForm.get('name')?.invalid && categoryForm.get('name')?.touched">
         <small *ngIf="categoryForm.get('name')?.errors?.['required']">El nombre es requerido</small>
         <small *ngIf="categoryForm.get('name')?.errors?.['minlength']">Mínimo 8 caracteres</small>
+        <small *ngIf="categoryForm.get('name')?.errors?.['whitespace']">No se permiten espacios en blanco vacíos</small>
       </div>
     </div>
 
